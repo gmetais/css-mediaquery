@@ -15,7 +15,7 @@ var RE_MEDIA_QUERY     = /^(?:(only|not)?\s*([_a-z][_a-z0-9-]*)|(\([^\)]+\)))(?:
     RE_MQ_EXPRESSION   = /^\(\s*([_a-z-][_a-z0-9-]*)\s*(?:\:\s*([^\)]+))?\s*\)$/,
     RE_MQ_FEATURE      = /^(?:(min|max)-)?(.+)/,
     RE_LENGTH_UNIT     = /(em|rem|px|cm|mm|in|pt|pc)?\s*$/,
-    RE_RESOLUTION_UNIT = /(dpi|dpcm|dppx)?\s*$/;
+    RE_RESOLUTION_UNIT = /(dpi|dpcm|dppx|x)?\s*$/;
 
 function matchQuery(mediaQuery, values) {
     return parseQuery(mediaQuery).some(function (query) {
@@ -159,6 +159,7 @@ function toDpi(resolution) {
     switch (units) {
         case 'dpcm': return value / 2.54;
         case 'dppx': return value * 96;
+        case 'x'   : return value * 96;
         default    : return value;
     }
 }
